@@ -2,19 +2,14 @@ from main import BooksCollector
 
 class TestBooksCollector:
 
-
     def test_books_genre_empty_dict(self):
-        books_genre = BooksCollector()
+        collector = BooksCollector()
         empty_dict = {}
-        assert books_genre.empty_dict == 'Словарь пустой'
+        assert collector.get_books_genre() == empty_dict, "Словарь не пустой"
 
     def test_favorite_empty_list(self):
         collector = BooksCollector()
         assert collector.get_list_of_favorites_books() == [], 'Список не пустой!'
-
-    def test_books_genre_empty_dict(self):
-        collector = BooksCollector()
-        assert collector.get_books_genre() == {}, 'Словарь не пустой'
 
     def test_add_new_book(self):
         collector = BooksCollector()
@@ -23,11 +18,10 @@ class TestBooksCollector:
         assert 'Божественная комедия' in collector.get_books_genre()
 
     def test_set_book_genre_true(self):
-        new_book = BooksCollector()
-        new_book.books_genre = {'1984': 'Фантастика'}
-        new_book.genres = ['Фантастика']
-        new_book.set_book_genre('1984', 'Фантастика')
-        assert new_book.books_genre['1984'] == 'Фантастика'
+        collector = BooksCollector()
+        collector.add_new_book('1984')
+        collector.set_book_genre('1984', 'Фантастика')
+        assert collector.get_book_genre('1984') == 'Фантастика'
 
     def test_get_book_genre(self):
         collector = BooksCollector()
@@ -66,6 +60,8 @@ class TestBooksCollector:
         collector.add_new_book('Звездные войны')
         collector.add_book_in_favorites('Звездные войны')
         assert collector.get_list_of_favorites_books() == ['Звездные войны']
+
+
 
 
 
